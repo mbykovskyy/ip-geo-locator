@@ -14,7 +14,8 @@
     "ip",
     "geo",
     "geographic",
-    "location"
+    "location",
+    "locator"
   ],
   "ignore": [
     "**/.*",
