@@ -1,0 +1,31 @@
+{
+  "name": "ip-geo-locator",
+  "version": "0.0.0",
+  "description": "A polymer web component for locating geographic location of an IP address.",
+  "homepage": "https://github.com/mbykovskyy/ip-geo-locator",
+  "author": "Maksym Bykovskyy",
+  "license": "MIT",
+  "main": "ip-geo-locator.html",
+  "keywords": [
+    "ip-geo-locator",
+    "web-component",
+    "web-components",
+    "polymer",
+    "ip",
+    "geo",
+    "geographic",
+    "location"
+  ],
+  "ignore": [
+    "**/.*",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.4.0",
+    "google-apis": "GoogleWebComponents/google-apis#~0.3.2",
+    "core-ajax": "Polymer/core-ajax#~0.4.0"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#~0.4.0"
+  }
+}

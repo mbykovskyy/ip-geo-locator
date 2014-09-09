@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>Should Return A Location Object</title>
+  <script src="../../platform/platform.js"></script>
+  <link rel="import" href="../../polymer-test-tools/tools.html">
+  <script src="../../polymer-test-tools/htmltest.js"></script>
+  <link rel="import" href="../ip-geo-locator.html">
+</head>
+<body>
+  <ip-geo-locator id="locator"></ip-geo-locator>
+
+  <script>
+    var locator = document.getElementById('locator');
+
+    locator.addEventListener('location-changed', function() {
+      var location = locator.location;
+      // This is the bare information that should be returned by the locator
+      assert.isNumber(location.latitude);
+      assert.isNumber(location.longitude);
+
+      var provider = locator.provider;
+      assert.match(provider, /^GOOGLE$|^FREE_GEO_IP$/);
+      done();
+    });
+  </script>
+</body>
+</html>
