@@ -22,11 +22,11 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.4.0",
-    "google-apis": "GoogleWebComponents/google-apis#~0.3.2",
-    "core-ajax": "Polymer/core-ajax#~0.4.0"
+    "polymer": "Polymer/polymer#~0.5.1",
+    "google-apis": "GoogleWebComponents/google-apis#~0.4.3",
+    "core-ajax": "Polymer/core-ajax#~0.5.1"
   },
   "devDependencies": {
-    "polymer-test-tools": "Polymer/polymer-test-tools#~0.4.0"
+    "polymer-test-tools": "Polymer/polymer-test-tools#~0.5.1"
   }
 }
