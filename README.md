@@ -13,14 +13,19 @@ bower install --save mbykovskyy/ip-geo-locator
 <link rel="import" href="ip-geo-locator.html">
 
 <ip-geo-locator id="locator"></ip-geo-locator>
-Your approximate location is: <pre id="output"></pre>
+Your approximate location is: <pre id="location"></pre>
+Provided by: <pre id="provider"></pre>
 
 <script>
   var locator = document.getElementById('locator');
 
   locator.addEventListener('location-changed', function() {
-    var output = document.getElementById('output');
-    output.innerHTML = JSON.stringify(locator.location, null, 2);
+    var location = document.getElementById('location');
+    location.innerHTML = JSON.stringify(locator.location, null, 2);
+  });
+  locator.addEventListener('provider-changed', function() {
+    var provider = document.getElementById('provider');
+    provider.innerHTML = locator.provider;
   });
 </script>
 ```

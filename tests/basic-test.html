@@ -15,18 +15,10 @@
 
       suite('ip-geo-locator', function() {
 
-        test('return a location object', function(done) {
-          locator.addEventListener('location-changed', function() {
-            var location = locator.location;
-            // This is the bare information that should be returned by the locator
-            assert.isNumber(location.latitude);
-            assert.isNumber(location.longitude);
-
-            var provider = locator.provider;
-            assert.match(provider, /^GOOGLE$|^FREE_GEO_IP$/);
-            done();
-          });
+        test('has correct name', function() {
+          assert.equal(locator.is, 'ip-geo-locator');
         });
+
       });
     </script>
 
