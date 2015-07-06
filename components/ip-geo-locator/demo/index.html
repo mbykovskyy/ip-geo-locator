@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../ip-geo-locator.html">
+</head>
+<body>
+  <ip-geo-locator id="locator"></ip-geo-locator>
+  Your approximate location is: <pre id="location"></pre>
+  Provided by: <pre id="provider"></pre>
+
+  <script>
+    var locator = document.getElementById('locator');
+
+    locator.addEventListener('location-changed', function() {
+      var location = document.getElementById('location');
+      location.innerHTML = JSON.stringify(locator.location, null, 2);
+    });
+    locator.addEventListener('provider-changed', function() {
+      var provider = document.getElementById('provider');
+      provider.innerHTML = locator.provider;
+    });
+  </script>
+</body>
+</html>

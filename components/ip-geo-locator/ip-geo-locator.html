@@ -1,0 +1,114 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../google-apis/google-legacy-loader.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<!--
+A polymer web component for locating geographic location of an IP address.
+
+    <ip-geo-locator id="locator"></ip-geo-locator>
+
+    Your approximate location is: <pre id="location"></pre>
+    Provided by: <pre id="provider"></pre>
+
+    <script>
+      var locator = document.getElementById('locator');
+
+      locator.addEventListener('location-changed', function() {
+        var location = document.getElementById('location');
+        location.innerHTML = JSON.stringify(locator.location, null, 2);
+      });
+
+      locator.addEventListener('provider-changed', function() {
+        var provider = document.getElementById('provider');
+        provider.innerHTML = locator.provider;
+      });
+    </script>
+
+@group MBykovskyy Elements
+@element ip-geo-locator
+@blurb A polymer web component for locating geographic location of an IP address
+@homepage http://mbykovskyy.github.io/ip-geo-locator
+@demo demo/index.html
+-->
+<dom-module id="ip-geo-locator" attributes="location provider">
+  <style>
+    :host {
+      display: none;
+    }
+  </style>
+
+  <template>
+    <google-legacy-loader on-api-load="_apiLoaded"></google-legacy-loader>
+
+    <iron-ajax id="freeGeoIp" url="//freegeoip.net/json/" on-response="_freeGeoIpResponsed"></iron-ajax>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'ip-geo-locator',
+
+    /**
+     * Fired when location changes.
+     *
+     * @event location
+     */
+
+    /**
+     * Fired when provider changes.
+     *
+     * @event provider
+     */
+
+    properties: {
+      /**
+       * Geographic location of the IP address.
+       *
+       * @attribute location
+       * @type Object
+       * @default null
+       */
+      location: {
+        type: Object,
+        value: null,
+        readOnly: true,
+        reflectToAttribute: true,
+        notify: true
+      },
+
+      /**
+       * Specifies which service provided the information. Can be GOOGLE or
+       * FREE_GEO_IP.
+       *
+       * @attribute provider
+       * @type String
+       * @default ''
+       */
+      provider: {
+        type: String,
+        value: '',
+        readOnly: true,
+        reflectToAttribute: true,
+        notify: true
+      }
+    },
+
+    _apiLoaded: function() {
+      var location = google.loader.ClientLocation;
+
+      if (location) {
+        this._setProvider('GOOGLE');
+        this._setLocation(location);
+      }
+      else {
+        // Fallback on freegeoip.net service.
+        this.$.freeGeoIp.generateRequest();
+      }
+    },
+
+    _freeGeoIpResponsed: function(e) {
+      this._setProvider('FREE_GEO_IP');
+      this._setLocation(e.detail.response);
+    }
+  });
+</script>
