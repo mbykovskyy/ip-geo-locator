@@ -11,21 +11,35 @@
     <ip-geo-locator id="locator"></ip-geo-locator>
 
     <script>
+      function verifyLocator(locator, done) {
+        var location = locator.location;
+        // This is the bare information that should be returned by the locator
+        assert.isNumber(location.latitude);
+        assert.isNumber(location.longitude);
+
+        var provider = locator.provider;
+        assert.match(provider, /^GOOGLE$|^FREE_GEO_IP$/);
+        done();
+      }
+
       var locator = document.getElementById('locator');
 
       suite('ip-geo-locator', function() {
 
         test('return a location object', function(done) {
-          locator.addEventListener('location-changed', function() {
-            var location = locator.location;
-            // This is the bare information that should be returned by the locator
-            assert.isNumber(location.latitude);
-            assert.isNumber(location.longitude);
+          var location = locator.location;
 
-            var provider = locator.provider;
-            assert.match(provider, /^GOOGLE$|^FREE_GEO_IP$/);
-            done();
-          });
+          // Sometimes the information arrives before we are able to subscribe
+          // to the event, therefore, we don't have to listen for
+          // location-changed event.
+          if (null === location) {
+            locator.addEventListener('location-changed', function() {
+              verifyLocator(locator, done);
+            });
+          }
+          else {
+            verifyLocator(locator, done);
+          }
         });
       });
     </script>
