@@ -1,6 +1,6 @@
 {
   "name": "ip-geo-locator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A polymer web component for locating geographic location of an IP address.",
   "homepage": "https://github.com/mbykovskyy/ip-geo-locator",
   "author": "Maksym Bykovskyy",
